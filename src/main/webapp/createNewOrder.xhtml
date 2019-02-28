@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head>
+		<meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+		<h:outputStylesheet library="css" name="styles.css"  />
+		<title>Create a new Order</title>
+	</h:head>
+
+	<h:body styleClass="body">
+	
+		<h1>create new Order</h1>	
+			<h:form id="Create-Customer-form">
+            <h:panelGrid columns="2">
+            
+            	<h:outputLabel for="customer-name">Name (Required):</h:outputLabel>
+            	<h:inputText value="#{managedBeanCustomer.newCustomer.name}" id="customer-name" required="true">
+            		<f:validateLength for="nameText" minimum="4" maximum="30" />
+            	</h:inputText>
+            	 
+	            <h:outputLabel for="Item">Phone Number (Required):</h:outputLabel>
+	            <h:inputText value="#{managedBeanCustomer.newCustomer.phone}" id="phone-number" required="true"></h:inputText>
+
+	           	<h:outputLabel for="Quantity">Email Id:</h:outputLabel>
+	            <h:inputText value="#{managedBeanCustomer.newCustomer.email}" id="email"></h:inputText>
+	            
+	           	
+            </h:panelGrid>
+            <h:messages styleClass="hMessage"/>
+            <h:commandButton action="#{managedBeanCustomer.addCustomer()}" value="Create order"></h:commandButton>
+            </h:form>
+            		    
+		<hr/>
+		<h:link outcome="listOfCustomers.jsf" value="order List"/> | 
+		<h:link outcome="searchForCustomer.jsf" value="Search for a order"/> | 
+		<h:link outcome="index.jsf" value="Main Page"/>
+			
+	</h:body>
+</html>

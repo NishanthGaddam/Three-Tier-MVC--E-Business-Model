@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head>
+		<meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+		<h:outputStylesheet library="css" name="styles.css"  />
+		<title>List of Customers</title>
+	</h:head>
+
+	<h:body styleClass="body">
+		<h1>List of Customers</h1>
+		
+			<h:messages styleClass="hMessage"/>
+		
+			<h:form>
+			<h:dataTable value="#{managedBeanCustomer.customersList}" var="customer"
+			styleClass="table" headerClass="tableHeader" rowClasses="tableOddRow,tableEvenRow">
+				<h:column>
+					<f:facet name="header">Customer ID</f:facet> 
+					#{customer.id}
+		        </h:column>
+				<h:column>
+					<f:facet name="header">Name</f:facet> 
+					#{customer.name}
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Address</f:facet> 
+					#{customer.address}
+		        </h:column>
+		       	<h:column>
+					<f:facet name="header">No. of Orders</f:facet> 
+					<h:outputText value="#{customer.orders.size()}" />
+		        </h:column>
+		       	<h:column>
+					<f:facet name="header">Action</f:facet>
+					<h:commandLink action="#{managedBeanCustomer.getCustomerDetailsPage()}" value="View Details">
+						<f:setPropertyActionListener target="#{managedBeanCustomer.currentCustomer}" value="#{customer}" />
+					</h:commandLink>
+		        </h:column>
+		    </h:dataTable>
+		    </h:form>
+		    
+		   	<h:outputText value="Total customers are #{managedBeanCustomer.customersList.size()}." />
+		    
+		<hr/>
+		<h:link outcome="createNewCustomer.jsf" value="Create a new Customer"/> |  
+		<h:link outcome="searchForCustomer.jsf" value="Search for a Customer"/> | 
+		<h:link outcome="index.jsf" value="Main Page"/>
+			
+	</h:body>
+</html>

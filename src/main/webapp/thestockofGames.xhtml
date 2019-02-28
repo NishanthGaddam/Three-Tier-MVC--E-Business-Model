@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head>
+		<meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+		<h:outputStylesheet library="css" name="styles.css"  />
+		<title>The Stock of Smart Phones</title>
+	</h:head>
+
+	<h:body styleClass="body">
+		<h1>The Stock of Smart Phones</h1>
+		
+			<h:messages styleClass="hMessage"/>
+		
+			<h:form>
+			<h:dataTable value="#{managedBeanPhone.smartPhonesList}" var="smartPhone"
+			styleClass="table" headerClass="tableHeader" rowClasses="tableOddRow,tableEvenRow">
+				<h:column>
+					<f:facet name="header">ID</f:facet> 
+					#{smartPhone.id}
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Brand</f:facet> 
+					#{smartPhone.brand}
+		        </h:column>
+		       	<h:column>
+					<f:facet name="header">Model</f:facet> 
+					#{smartPhone.model}
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Operating System</f:facet> 
+					#{smartPhone.operatingSystem}
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Camera Info</f:facet> 
+					#{smartPhone.camera}
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Price</f:facet> 
+					$#{smartPhone.price}
+		        </h:column>
+		       	<h:column>
+					<f:facet name="header">No. of Orders</f:facet> 
+					<h:outputText value="#{smartPhone.orders.size()}" />
+		        </h:column>
+		       	<h:column>
+					<f:facet name="header">Action</f:facet>
+					<h:commandLink action="#{managedBeanPhone.getSmartPhoneDetailsPage()}" value="View">
+						<f:setPropertyActionListener target="#{managedBeanPhone.currentSmartPhone}" value="#{smartPhone}" />
+					</h:commandLink>
+		        </h:column>
+		    </h:dataTable>
+		    </h:form>
+		    
+		   	<h:outputText value="Total Smart Phones are #{managedBeanPhone.smartPhonesList.size()}." />
+		    
+		<hr/>
+		<h:link outcome="createNewSmartPhone.jsf" value="Create a new Smart Phone"/> | 
+		<h:link outcome="searchForSmartPhone.jsf" value="Search for a Phone"/> | 
+		<h:link outcome="index.jsf" value="Main Page"/>
+			
+	</h:body>
+</html>

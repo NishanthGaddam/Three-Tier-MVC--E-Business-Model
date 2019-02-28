@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head>
+		<meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+		<h:outputStylesheet library="css" name="styles.css"  />
+		<title>Laptop: #{managedBeanLaptop.currentLaptop.id} - #{managedBeanLaptop.currentLaptop.brand} - #{managedBeanLaptop.currentLaptop.model}</title>
+	</h:head>
+
+	<h:body styleClass="body">
+		<h1>Laptop: #{managedBeanLaptop.currentLaptop.id} - #{managedBeanLaptop.currentLaptop.brand} - #{managedBeanLaptop.currentLaptop.model}</h1>
+		<h2>Details</h2>
+		<h:outputText value="ID: #{managedBeanLaptop.currentLaptop.id}" /><br/>
+		<h:outputText value="Brand: #{managedBeanLaptop.currentLaptop.brand}" /><br/>
+		<h:outputText value="Model: #{managedBeanLaptop.currentLaptop.model}" /><br/>
+		<h:outputText value="Display Info: #{managedBeanLaptop.currentLaptop.display}" /><br/>
+		<h:outputText value="Weight: #{managedBeanLaptop.currentLaptop.weight}" /><br/>
+		<h:outputText value="Operating System Info: #{managedBeanLaptop.currentLaptop.operatingSystem}" /><br/>
+		<h:outputText value="Camera Info: #{managedBeanLaptop.currentLaptop.camera}" /><br/>
+		<h:outputText value="Wireless Info: #{managedBeanLaptop.currentLaptop.wireless}" /><br/>
+		<h:outputText value="Price Info: $#{managedBeanLaptop.currentLaptop.price}" /><br/>
+		<h:outputText value="Network Interface Info: #{managedBeanLaptop.currentLaptop.networkInterface}" /><br/>
+		<h:outputText value="Hard Disk Info: #{managedBeanLaptop.currentLaptop.hardDisk}" /><br/>
+		<h:outputText value="Optical Drive Info: #{managedBeanLaptop.currentLaptop.opticalDrive}" /><br/>
+		<h:outputText value="RAM Info: #{managedBeanLaptop.currentLaptop.ram}" /><br/>
+		<h:outputText value="Processor Info: #{managedBeanLaptop.currentLaptop.processor}" /><br/>
+		<h:outputText value="Other Info: #{managedBeanLaptop.currentLaptop.description}" /><br/>
+		
+		<h2>Orders (#{managedBeanLaptop.currentLaptop.orders.size()})</h2>
+		
+		<h:form>
+		<h:dataTable value="#{managedBeanLaptop.currentLaptop.orders}" var="order"
+		styleClass="table" headerClass="tableHeader" rowClasses="tableOddRow,tableEvenRow">
+				<h:column>
+					<f:facet name="header">Order ID</f:facet> 
+					<h:commandLink action="#{managedBeanOrder.getOrderDetailsPage()}" value="#{order.id}">
+						<f:setPropertyActionListener target="#{managedBeanOrder.currentOrder}" value="#{order}" />
+					</h:commandLink>
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Order Time</f:facet>
+					<h:commandLink action="#{managedBeanOrder.getOrderDetailsPage()}" value="#{order.orderTime}">
+						<f:setPropertyActionListener target="#{managedBeanOrder.currentOrder}" value="#{order}" />
+					</h:commandLink>
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Product Type</f:facet> 
+					#{order.product.productType}
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Product Brand</f:facet> 
+					#{order.product.brand}
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Product Model</f:facet> 
+					#{order.product.model}
+		        </h:column>
+		       	<h:column>
+					<f:facet name="header">Customer Name</f:facet>
+					<h:commandLink action="#{managedBeanCustomer.getCustomerDetailsPage()}" value="#{order.customer.name}">
+						<f:setPropertyActionListener target="#{managedBeanCustomer.currentCustomer}" value="#{order.customer}" />
+					</h:commandLink>
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Unit Price</f:facet> 
+					$#{order.product.price}
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Quantity</f:facet> 
+					#{order.quantity}
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Total Price</f:facet> 
+					$#{managedBeanOrder.calcualtePrice(order.product.price, order.quantity)}
+		        </h:column>
+		       	<h:column>
+					<f:facet name="header">Action</f:facet>
+					<h:commandLink action="#{managedBeanOrder.getAfterOrderDeletePage()}" value="Delete">
+						<f:setPropertyActionListener target="#{managedBeanOrder.deleteOrder}" value="#{order.id}" />
+					</h:commandLink>
+		        </h:column>
+		    </h:dataTable>
+		    </h:form>
+		<hr/>
+		<h:link outcome="createNewLaptop.jsf" value="Create a new Laptop"/> | 
+		<h:link outcome="stockOfLaptops.jsf" value="The Stock of Laptops"/> | 
+		<h:link outcome="searchForLaptop.jsf" value="Search for a Laptop"/> |
+		<h:link outcome="index.jsf" value="Main Page"/>
+	</h:body>
+</html>

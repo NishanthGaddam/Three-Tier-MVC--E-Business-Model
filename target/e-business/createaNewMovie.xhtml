@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head>
+		<meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+		<h:outputStylesheet library="css" name="styles.css"  />
+		<title>Create a new Movie</title>
+	</h:head>
+
+	<h:body styleClass="body">
+	
+		<h1>Create a new Movie</h1>	
+			<h:form id="createSmartPhone">
+            <h:panelGrid columns="4">
+            
+				<h:outputLabel for="title">Title:</h:outputLabel>
+	            <h:inputText value="#{managedBeanPhone.newSmartPhone.brand}" id="brand"></h:inputText>
+	 
+                    
+	            <h:outputLabel for="price">Description:</h:outputLabel>
+	            <h:inputText value="#{managedBeanPhone.newSmartPhone.price}" id="price"></h:inputText>
+	            
+	            <h:outputLabel for="display">Company:</h:outputLabel>
+	            <h:inputText value="#{managedBeanPhone.newSmartPhone.display}" id="display"></h:inputText>
+	            
+	           
+	            
+	            <h:outputLabel for="camera">Platform:</h:outputLabel>
+	            <h:inputText value="#{managedBeanPhone.newSmartPhone.camera}" id="camera"></h:inputText>
+	
+	           
+	   
+	            <h:outputLabel for="connectivity">Clasification:</h:outputLabel>
+	            <h:inputText value="#{managedBeanPhone.newSmartPhone.connectivity}" id="connectivity"></h:inputText>
+	       
+	            <h:outputLabel for="locationFeature">price:</h:outputLabel>
+	            <h:inputText value="#{managedBeanPhone.newSmartPhone.locationFeature}" id="locationFeature"></h:inputText>
+	           
+	            <h:outputLabel for="ram">stock number:</h:outputLabel>
+	            <h:inputText value="#{managedBeanLaptop.newLaptop.ram}" id="ram"></h:inputText>
+	          
+	            <h:outputLabel for="simType">Duration(minutes):</h:outputLabel>
+	            <h:inputText value="#{managedBeanPhone.newSmartPhone.simType}" id="simType"></h:inputText>
+	           
+	            <h:outputLabel for="numberOfSim">Special features:</h:outputLabel>
+	            <h:inputText value="#{managedBeanPhone.newSmartPhone.numberOfSim}" id="numberOfSim"></h:inputText>
+	            
+	          
+	            
+	            
+            </h:panelGrid>
+            <h:messages styleClass="hMessage"/>
+            <h:commandButton action="#{managedBeanPhone.addSmartPhone()}" value="Create Movie"></h:commandButton>
+            </h:form>
+            		    
+		<hr/>
+		<h:link outcome="ThstockofMovies.jsf" value="The Stock of Movies"/> | 
+		<h:link outcome="searchForMovies.jsf" value="Search for a Movie"/> | 
+		<h:link outcome="index.jsf" value="Main Page"/>
+			
+	</h:body>
+</html>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head>
+		<meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+		<h:outputStylesheet library="css" name="styles.css"  />
+		<title>SmartPhone: #{managedBeanPhone.currentSmartPhone.id} - #{managedBeanPhone.currentSmartPhone.brand} - #{managedBeanPhone.currentSmartPhone.model}</title>
+	</h:head>
+
+	<h:body styleClass="body">
+		<h1>SmartPhone: #{managedBeanPhone.currentSmartPhone.id} - #{managedBeanPhone.currentSmartPhone.brand} - #{managedBeanPhone.currentSmartPhone.model}</h1>
+		<h2>Details</h2>
+		<h:outputText value="ID: #{managedBeanPhone.currentSmartPhone.id}" /><br/>
+		<h:outputText value="Brand: #{managedBeanPhone.currentSmartPhone.brand}" /><br/>
+		<h:outputText value="Model: #{managedBeanPhone.currentSmartPhone.model}" /><br/>
+		<h:outputText value="Display Info: #{managedBeanPhone.currentSmartPhone.display}" /><br/>
+		<h:outputText value="Weight: #{managedBeanPhone.currentSmartPhone.weight}" /><br/>
+		<h:outputText value="Operating System: #{managedBeanPhone.currentSmartPhone.operatingSystem}" /><br/>
+		<h:outputText value="Camera Info: #{managedBeanPhone.currentSmartPhone.camera}" /><br/>
+		<h:outputText value="Wireless Info: #{managedBeanPhone.currentSmartPhone.wireless}" /><br/>
+		<h:outputText value="Price: $#{managedBeanPhone.currentSmartPhone.price}" /><br/>
+		<h:outputText value="Connectivity Features: #{managedBeanPhone.currentSmartPhone.connectivity}" /><br/>
+		<h:outputText value="Location Feature Info: #{managedBeanPhone.currentSmartPhone.locationFeature}" /><br/>
+		<h:outputText value="SIM Type: #{managedBeanPhone.currentSmartPhone.simType}" /><br/>
+		<h:outputText value="Number of SIM: #{managedBeanPhone.currentSmartPhone.numberOfSim}" /><br/>
+		<h:outputText value="Description: #{managedBeanPhone.currentSmartPhone.description}" /><br/>
+		
+		<h2>Orders (#{managedBeanPhone.currentSmartPhone.orders.size()})</h2>
+		
+		<h:form>
+		<h:dataTable value="#{managedBeanPhone.currentSmartPhone.orders}" var="order"
+		styleClass="table" headerClass="tableHeader" rowClasses="tableOddRow,tableEvenRow">
+				<h:column>
+					<f:facet name="header">Order ID</f:facet> 
+					<h:commandLink action="#{managedBeanOrder.getOrderDetailsPage()}" value="#{order.id}">
+						<f:setPropertyActionListener target="#{managedBeanOrder.currentOrder}" value="#{order}" />
+					</h:commandLink>
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Order Time</f:facet>
+					<h:commandLink action="#{managedBeanOrder.getOrderDetailsPage()}" value="#{order.orderTime}">
+						<f:setPropertyActionListener target="#{managedBeanOrder.currentOrder}" value="#{order}" />
+					</h:commandLink>
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Product Type</f:facet> 
+					#{order.product.productType}
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Product Brand</f:facet> 
+					#{order.product.brand}
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Product Model</f:facet> 
+					#{order.product.model}
+		        </h:column>
+		       	<h:column>
+					<f:facet name="header">Customer Name</f:facet>
+					<h:commandLink action="#{managedBeanCustomer.getCustomerDetailsPage()}" value="#{order.customer.name}">
+						<f:setPropertyActionListener target="#{managedBeanCustomer.currentCustomer}" value="#{order.customer}" />
+					</h:commandLink>
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Unit Price</f:facet> 
+					$#{order.product.price}
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Quantity</f:facet> 
+					#{order.quantity}
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Total Price</f:facet> 
+					$#{managedBeanOrder.calcualtePrice(order.product.price, order.quantity)}
+		        </h:column>
+		       	<h:column>
+					<f:facet name="header">Action</f:facet>
+					<h:commandLink action="#{managedBeanOrder.getAfterOrderDeletePage()}" value="Delete">
+						<f:setPropertyActionListener target="#{managedBeanOrder.deleteOrder}" value="#{order.id}" />
+					</h:commandLink>
+		        </h:column>
+		    </h:dataTable>
+		    </h:form>
+		<hr/>
+		<h:link outcome="createNewSmartPhone.jsf" value="Create a new Phone"/> | 
+		<h:link outcome="stockOfSmartPhones.jsf" value="The Stock of Phones"/> |
+		<h:link outcome="searchForSmartPhone.jsf" value="Search for a Phone"/> | 
+		<h:link outcome="index.jsf" value="Main Page"/>
+	</h:body>
+</html>

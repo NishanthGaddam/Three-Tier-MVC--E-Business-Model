@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head>
+		<meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+		<h:outputStylesheet library="css" name="styles.css"  />
+		<title>List of Orders</title>
+	</h:head>
+
+	<h:body styleClass="body">
+		<h1>List of Orders</h1>
+		
+			<h:messages styleClass="hMessage"/>
+		
+			<h:form>
+			<h:dataTable value="#{managedBeanOrder.ordersList}" var="order"
+			styleClass="table" headerClass="tableHeader" rowClasses="tableOddRow,tableEvenRow">
+				<h:column>
+					<f:facet name="header">Order ID</f:facet> 
+					<h:commandLink action="#{managedBeanOrder.getOrderDetailsPage()}" value="#{order.id}">
+						<f:setPropertyActionListener target="#{managedBeanOrder.currentOrder}" value="#{order}" />
+					</h:commandLink>
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Order Time</f:facet>
+					<h:commandLink action="#{managedBeanOrder.getOrderDetailsPage()}" value="#{order.orderTime}">
+						<f:setPropertyActionListener target="#{managedBeanOrder.currentOrder}" value="#{order}" />
+					</h:commandLink>
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Product Type</f:facet> 
+					#{order.product.productType}
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Product Brand</f:facet> 
+					#{order.product.brand}
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Product Model</f:facet> 
+					#{order.product.model}
+		        </h:column>
+		       	<h:column>
+					<f:facet name="header">Customer Name</f:facet>
+					<h:commandLink action="#{managedBeanCustomer.getCustomerDetailsPage()}" value="#{order.customer.name}">
+						<f:setPropertyActionListener target="#{managedBeanCustomer.currentCustomer}" value="#{order.customer}" />
+					</h:commandLink>
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Unit Price</f:facet> 
+					$#{order.product.price}
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Quantity</f:facet> 
+					#{order.quantity}
+		        </h:column>
+		        <h:column>
+					<f:facet name="header">Total Price</f:facet> 
+					$#{managedBeanOrder.calcualtePrice(order.product.price, order.quantity)}
+		        </h:column>
+		       	<h:column>
+					<f:facet name="header">Action</f:facet>
+					<h:commandLink action="#{managedBeanOrder.getAfterOrderDeletePage()}" value="Delete">
+						<f:setPropertyActionListener target="#{managedBeanOrder.deleteOrder}" value="#{order.id}" />
+					</h:commandLink>
+		        </h:column>
+		    </h:dataTable>
+		    </h:form>
+		    
+		   	<h:outputText value="Total orders are #{managedBeanOrder.ordersList.size()}." />
+		    
+		<hr/>
+		<h:link outcome="createNewOrder.jsf" value="Create a new Order"/> |  
+		<h:link outcome="searchForOrder.jsf" value="Search for an Order"/> | 
+		<h:link outcome="index.jsf" value="Main Page"/>
+			
+	</h:body>
+</html>

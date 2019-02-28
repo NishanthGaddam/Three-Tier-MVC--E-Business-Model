@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head>
+		<meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+		<h:outputStylesheet library="css" name="styles.css"  />
+		<title>Customer: #{managedBeanCustomer.currentCustomer.name}</title>
+	</h:head>
+
+	<h:body styleClass="body">
+		<h1>Customer: #{managedBeanCustomer.currentCustomer.name}</h1>
+		
+		<h2>Details</h2>
+		
+		<h:outputText value="ID: #{managedBeanCustomer.currentCustomer.id}" /><br/>
+		<h:outputText value="Name: #{managedBeanCustomer.currentCustomer.name}" /><br/>
+		<h:outputText value="Phone Number: #{managedBeanCustomer.currentCustomer.phone}" /><br/>
+		<h:outputText value="Address: #{managedBeanCustomer.currentCustomer.address}" /><br/>
+		<h:outputText value="Email: #{managedBeanCustomer.currentCustomer.email}" /><br/>
+		
+		<h2>Orders (#{managedBeanCustomer.currentCustomer.orders.size()})</h2>
+		
+		<h:dataTable value="#{managedBeanCustomer.currentCustomer.orders}" var="order"
+		styleClass="table"
+		headerClass="tableHeader"
+		rowClasses="tableOddRow,tableEvenRow"
+		>
+			<h:column>
+				<f:facet name="header">Order ID</f:facet> 
+				#{order.id}
+	        </h:column>
+	        <h:column>
+				<f:facet name="header">Order Time</f:facet> 
+				#{order.orderTime}
+	        </h:column>
+	       	<h:column>
+				<f:facet name="header">Product ID</f:facet> 
+				#{order.product.id}
+	        </h:column>
+	       	<h:column>
+				<f:facet name="header">Product Brand</f:facet> 
+				#{order.product.brand}
+	        </h:column>
+	       	<h:column>
+				<f:facet name="header">Product Model</f:facet> 
+				#{order.product.model}
+	        </h:column>
+	       	<h:column>
+				<f:facet name="header">Unit Price</f:facet> 
+				$#{order.product.price}
+	        </h:column>
+	       	<h:column>
+				<f:facet name="header">Qty</f:facet> 
+				#{order.quantity}
+	        </h:column>
+	       	<h:column>
+				<f:facet name="header">Total Price</f:facet> 
+				$#{managedBeanCustomer.calcualtePrice(order.product.price, order.quantity)}
+	        </h:column>
+        </h:dataTable>
+		<hr/>
+		<h:link outcome="createNewCustomer.jsf" value="Create a new Customer"/> |  
+		<h:link outcome="listOfCustomers.jsf" value="List of Customers"/> | 
+		<h:link outcome="searchForCustomer.jsf" value="Search for a Customer"/> | 
+		<h:link outcome="index.jsf" value="Main Page"/>
+	</h:body>
+</html>

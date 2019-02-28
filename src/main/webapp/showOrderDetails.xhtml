@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head>
+		<meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+		<h:outputStylesheet library="css" name="styles.css"  />
+		<title>Order: #{managedBeanOrder.currentOrder.id}</title>
+	</h:head>
+
+	<h:body styleClass="body">
+		<h1>Order: #{managedBeanOrder.currentOrder.id}</h1>
+		<h2>Details</h2>
+		
+		<h3>Main Details</h3>
+		<h:outputText value="Order ID: #{managedBeanOrder.currentOrder.id}" /><br/>
+		<h:outputText value="Order Time: #{managedBeanOrder.currentOrder.orderTime}" /><br/>
+		<h:outputText value="Order Quantity: #{managedBeanOrder.currentOrder.quantity}" /><br/>
+		<h:outputText value="Product Unit Price: #{managedBeanOrder.currentOrder.product.price}" /><br/>
+		<h:outputText value="Total Price: $#{managedBeanOrder.calcualtePrice(managedBeanOrder.currentOrder.product.price, managedBeanOrder.currentOrder.quantity)}" /><br/>
+		
+		<h3>Product Details</h3>
+		<h:outputText value="Id: #{managedBeanOrder.currentOrder.product.id}" /><br/>
+		<h:outputText value="Brand: #{managedBeanOrder.currentOrder.product.brand}" /><br/>
+		<h:outputText value="Model: #{managedBeanOrder.currentOrder.product.model}" /><br/>
+		
+		<h3>Customer Details</h3>
+		<h:form>
+		<h:outputText value="Id: #{managedBeanOrder.currentOrder.customer.id}" /><br/>
+		<h:outputText value="Name: #{managedBeanOrder.currentOrder.customer.name}" /><br/>
+		<h:outputText value="Phone: #{managedBeanOrder.currentOrder.customer.phone}" /><br/>
+		<h:outputText value="Email: #{managedBeanOrder.currentOrder.customer.email}" /><br/>
+		<h:outputText value="Address: #{managedBeanOrder.currentOrder.customer.address}" /><br/>
+		<h:outputText value="Link: "/>
+		<h:commandLink action="#{managedBeanCustomer.getCustomerDetailsPage()}" value="Click here">
+			<f:setPropertyActionListener target="#{managedBeanCustomer.currentCustomer}" value="#{managedBeanOrder.currentOrder.customer}" />
+		</h:commandLink><br/>
+		</h:form>
+		
+		<hr/>
+		<h:link outcome="createNewOrder.jsf" value="Create a new Order"/> |  
+		<h:link outcome="listOfOrders.jsf" value="List of Orders"/> | 
+		<h:link outcome="searchForOrder.jsf" value="Search for an Order"/> | 
+		<h:link outcome="index.jsf" value="Main Page"/>
+	</h:body>
+</html>
